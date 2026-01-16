@@ -27,4 +27,15 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/:id/upvote', async (req, res) => {
+  await Deal.findByIdAndUpdate(req.params.id, { $inc: { score: 1 } });
+  res.redirect('/deals');
+});
+
+router.post('/:id/downvote', async (req, res) => {
+  await Deal.findByIdAndUpdate(req.params.id, { $inc: { score: -1 } });
+  res.redirect('/deals');
+});
+
+
 module.exports = router;

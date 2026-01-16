@@ -6,44 +6,65 @@
 <% if (!deals || deals.length===0) { %>
     <p class="text-center">No deals found.</p>
     <% } else { %>
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Score</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% deals.forEach(deal=> { %>
-                        <tr>
-                            <td>
-                                <%= deal.title %>
-                            </td>
-                            <td>
-                                <%= deal.category %>
-                            </td>
-                            <td>
-                                <%= deal.score %>
-                            </td>
-                            <td>
-                                <% if (deal.score> 10) { %>
-                                    <span class="badge bg-danger">Hot 🔥</span>
-                                    <% } else if (deal.score < -10) { %>
-                                        <span class="badge bg-info text-dark">Cold ❄️</span>
-                                        <% } else { %>
-                                            <span class="badge bg-secondary">Neutral</span>
-                                            <% } %>
-                            </td>
-                            <td>
-                                <a href="/deals/<%= deal._id %>" class="btn btn-primary btn-sm">Details</a>
-                            </td>
-                        </tr>
-                        <% }) %>
-                </tbody>
-            </table>
+        <div class="album py-5 bg-light">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+              <% deals.forEach(deal => { %>
+                <div class="col">
+                  <div class="card shadow-sm h-100">
+
+                    <a href="/deals/<%= deal._id %>">
+                      <img 
+                        src="<%= deal.imageUrl %>" 
+                        onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=60';"
+                        class="bd-placeholder-img card-img-top"
+                        style="height:225px; object-fit:cover;">
+                    </a>
+                    
+                    <div class="card-body">
+                      <h5><%= deal.title %></h5>
+
+                      <!-- Category -->
+                      <span class="badge bg-secondary"><%= deal.category %></span>
+
+                      <p class="mt-2"><%= deal.description %></p>
+
+                      <!-- Status -->
+                      <% if (deal.score > 20) { %>
+                        <span class="badge bg-danger">🔥 Hot</span>
+                      <% } else if (deal.score < 0) { %>
+                        <span class="badge bg-info text-dark">❄️ Cold</span>
+                      <% } else { %>
+                        <span class="badge bg-warning text-dark">😐 Neutral</span>
+                      <% } %>
+
+                      <p class="mt-2">Votes: <strong><%= deal.score %></strong></p>
+
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+
+                          <a href="/deals/<%= deal._id %>" class="btn btn-sm btn-outline-primary">
+                            Details
+                          </a>
+
+                          <form action="/deals/<%= deal._id %>/upvote" method="POST" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-success">👍</button>
+                          </form>
+
+                          <form action="/deals/<%= deal._id %>/downvote" method="POST" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-danger">👎</button>
+                          </form>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+
+            </div>
+          </div>
         </div>
         <% } %>

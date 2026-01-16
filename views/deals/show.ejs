@@ -2,8 +2,13 @@
     <div class="col-md-8">
         <div class="card mb-4 <%= deal.score > 10 ? 'border-danger' : (deal.score < -10 ? 'border-info' : '') %>">
             <% if (deal.imageUrl) { %>
-                <img src="<%= deal.imageUrl %>" class="card-img-top" alt="<%= deal.title %>"
+                <img 
+                    src="<%= deal.imageUrl || 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=60' %>"
+                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=60';"
+                    class="card-img-top"
+                    alt="<%= deal.title %>"
                     style="max-height: 400px; object-fit: cover;">
+
                 <% } %>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start">
