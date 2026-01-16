@@ -15,7 +15,7 @@ const dealsRouter = require("./routes/deals");
 const app = express();
 
 // Database setup
-mongoose.connect('mongodb://localhost/Projekt')
+mongoose.connect('mongodb://admin:secret@localhost:27017/Projekt?authSource=admin')
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
