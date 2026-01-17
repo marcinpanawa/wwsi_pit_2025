@@ -1,0 +1,50 @@
+<h1>Create New Deal</h1>
+
+<% if (typeof error !=='undefined' ) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= error %>
+    </div>
+    <% } %>
+
+        <form action="/deals/create" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title"
+                    value="<%= typeof body !== 'undefined' ? body.title : '' %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Electronics" <%=typeof body !=='undefined' && body.category==='Electronics'
+                        ? 'selected' : '' %>>Electronics</option>
+                    <option value="Fashion" <%=typeof body !=='undefined' && body.category==='Fashion' ? 'selected' : ''
+                        %>>Fashion</option>
+                    <option value="Home & Garden" <%=typeof body !=='undefined' && body.category==='Home & Garden'
+                        ? 'selected' : '' %>>Home & Garden</option>
+                    <option value="Food & Drink" <%=typeof body !=='undefined' && body.category==='Food & Drink'
+                        ? 'selected' : '' %>>Food & Drink</option>
+                    <option value="Services" <%=typeof body !=='undefined' && body.category==='Services' ? 'selected'
+                        : '' %>>Services</option>
+                    <option value="Other" <%=typeof body !=='undefined' && body.category==='Other' ? 'selected' : '' %>
+                        >Other</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="imageUrl" class="form-label">Image URL</label>
+                <input type="url" class="form-control" id="imageUrl" name="imageUrl"
+                    value="<%= typeof body !== 'undefined' ? body.imageUrl : '' %>" required
+                    placeholder="https://example.com/image.jpg">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4"
+                    required><%= typeof body !== 'undefined' ? body.description : '' %></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Deal</button>
+            <a href="/deals" class="btn btn-secondary">Cancel</a>
+        </form>

@@ -21,6 +21,23 @@
                                                 <span class="badge bg-primary fs-5 ms-2">
                                                     <%= deal.score %> pts
                                                 </span>
+
+                                                <% if (locals.user) { %>
+                                                    <div class="d-inline-block ms-3">
+                                                        <form action="/deals/<%= deal._id %>/vote" method="POST"
+                                                            class="d-inline">
+                                                            <input type="hidden" name="direction" value="up">
+                                                            <button type="submit"
+                                                                class="btn btn-success btn-sm">👍</button>
+                                                        </form>
+                                                        <form action="/deals/<%= deal._id %>/vote" method="POST"
+                                                            class="d-inline">
+                                                            <input type="hidden" name="direction" value="down">
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">👎</button>
+                                                        </form>
+                                                    </div>
+                                                    <% } %>
                             </div>
                         </div>
 
@@ -38,6 +55,49 @@
                             <small class="text-muted">Added on <%= new Date(deal.dateAdded).toLocaleDateString() %>
                                     </small>
                             <a href="/deals" class="btn btn-outline-secondary">Back to Deals</a>
+                        </div>
+
+                        <hr>
+
+                        <!-- Comments Section -->
+                        <div class="mt-4">
+                            <h4>Comments</h4>
+                            <% if (typeof comments !=='undefined' && comments.length> 0) { %>
+                                <ul class="list-group mb-3">
+                                    <% comments.forEach(comment=> { %>
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>
+                                                    <%= comment.user ? comment.user.name : 'Unknown User' %>
+                                                </strong>
+                                                <small class="text-muted">
+                                                    <%= new Date(comment.date).toLocaleString() %>
+                                                </small>
+                                            </div>
+                                            <p class="mb-1">
+                                                <%= comment.content %>
+                                            </p>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                                <% } else { %>
+                                    <p class="text-muted">No comments yet. Be the first to comment!</p>
+                                    <% } %>
+
+                                        <% if (locals.user) { %>
+                                            <form action="/deals/<%= deal._id %>/comments" method="POST">
+                                                <div class="mb-3">
+                                                    <label for="content" class="form-label">Add a Comment</label>
+                                                    <textarea class="form-control" id="content" name="content" rows="3"
+                                                        required></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                                            </form>
+                                            <% } else { %>
+                                                <div class="alert alert-info">
+                                                    Please <a href="/auth/login">log in</a> to leave a comment.
+                                                </div>
+                                                <% } %>
                         </div>
                     </div>
         </div>
