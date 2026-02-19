@@ -1,7 +1,12 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Deals</h1>
-    <!-- Future: Add 'Create Deal' button here if needed -->
-</div>
+<div class="album py-5">
+    <div class="no-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Deals</h1>
+            <% if (locals.user) { %>
+                <a href="/deals/create" class="btn btn-success">Create New Deal</a>
+                <% } %>
+        </div>
+    </div>
 
 <% if (!deals || deals.length===0) { %>
     <p class="text-center">No deals found.</p>
