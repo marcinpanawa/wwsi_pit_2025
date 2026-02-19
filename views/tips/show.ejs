@@ -1,0 +1,52 @@
+<div class="container mt-4">
+
+<h1 class="mb-4">Szczegóły sugestii</h1>
+
+<div class="card">
+  <div class="card-body">
+
+    <p>
+      <strong>URL:</strong><br/>
+      <a href="<%= tip.url %>" target="_blank"><%= tip.url %></a>
+    </p>
+
+    <p>
+      <strong>Opis:</strong><br/>
+      <%= tip.message %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <% if(tip.status === "new"){ %>
+        <span class="badge bg-success">new</span>
+      <% } else if(tip.status === "processed"){ %>
+        <span class="badge bg-primary">processed</span>
+      <% } else { %>
+        <span class="badge bg-danger">rejected</span>
+      <% } %>
+    </p>
+
+    <p><strong>Email:</strong> <%= tip.email || '-' %></p>
+    <p><strong>Data:</strong> <%= tip.createdAt.toLocaleString() %></p>
+
+    <div class="mt-4 d-flex gap-2">
+
+      <a class="btn btn-primary"
+         href="/tips/<%= tip._id %>/create-deal">
+         Utwórz deal
+      </a>
+
+      <form method="POST"
+            action="/tips/<%= tip._id %>/delete"
+            onsubmit="return confirm('Usunąć sugestię?')">
+        <button class="btn btn-outline-danger">Usuń</button>
+      </form>
+
+      <a class="btn btn-outline-secondary" href="/tips">← Lista</a>
+
+    </div>
+
+  </div>
+</div>
+
+</div>

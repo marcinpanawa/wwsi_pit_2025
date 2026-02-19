@@ -1,0 +1,50 @@
+<div class="container mt-4">
+
+<h1 class="mb-4">Sugestie</h1>
+
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Data</th>
+      <th>Status</th>
+      <th>Opis</th>
+      <th>URL</th>
+      <th>Akcje</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% tips.forEach(t => { %>
+    <tr>
+      <td><%= t.createdAt.toISOString().slice(0,10) %></td>
+
+      <td>
+        <% if(t.status === "new"){ %>
+          <span class="badge bg-success">new</span>
+        <% } else if(t.status === "processed"){ %>
+          <span class="badge bg-primary">processed</span>
+        <% } else { %>
+          <span class="badge bg-danger">rejected</span>
+        <% } %>
+      </td>
+
+      <td><%= t.message.substring(0,100) %></td>
+      <td class="text-truncate" style="max-width:250px;"><%= t.url %></td>
+
+      <td>
+        <a class="btn btn-sm btn-outline-primary"
+           href="/tips/<%= t._id %>">Podgląd</a>
+
+        <form method="POST"
+              action="/tips/<%= t._id %>/delete"
+              class="d-inline"
+              onsubmit="return confirm('Usunąć sugestię?')">
+          <button class="btn btn-sm btn-outline-danger">Usuń</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+</div>
