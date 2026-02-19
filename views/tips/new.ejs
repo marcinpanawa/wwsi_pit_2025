@@ -1,0 +1,46 @@
+<div class="container mt-4">
+
+<h1 class="mb-4">Dodaj sugestię okazji</h1>
+
+<% if (typeof error !== 'undefined') { %>
+  <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="card">
+  <div class="card-body">
+
+    <form method="POST" action="/tips">
+
+      <div class="mb-3">
+        <label class="form-label">URL *</label>
+        <input type="url"
+               name="url"
+               class="form-control"
+               required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Opis *</label>
+        <textarea name="message"
+                  maxlength="500"
+                  class="form-control"
+                  rows="4"
+                  required></textarea>
+        <div class="form-text">Max 500 znaków</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email (opcjonalnie)</label>
+        <input type="email"
+               name="email"
+               class="form-control" />
+      </div>
+
+      <button class="btn btn-primary">Wyślij sugestię</button>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
