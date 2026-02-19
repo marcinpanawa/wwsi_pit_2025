@@ -11,13 +11,15 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const dealsRouter = require("./routes/deals");
+const tipsRouter = require("./routes/tips");
 
 const app = express();
 
 // Database setup
-mongoose.connect('mongodb://localhost/Projekt')
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+mongoose
+  .connect("mongodb://localhost/Projekt")
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -32,12 +34,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Session setup
-app.use(session({
-  secret: 'secret_key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using https
-}));
+app.use(
+  session({
+    secret: "secret_key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }, // Set to true if using https
+  }),
+);
 
 // Make user available in all templates
 app.use((req, res, next) => {
@@ -49,6 +53,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/deals", dealsRouter);
+app.use("/tips", tipsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

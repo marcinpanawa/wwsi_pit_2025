@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const Deal = require("../models/Deal");
 
+// GET All Deals API
+router.get("/api/list", async (req, res) => {
+  try {
+    const deals = await Deal.find({});
+    res.json(deals);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
 // GET All Deals
 router.get("/", async (req, res) => {
   try {
