@@ -50,6 +50,11 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/deals", dealsRouter);
 
+// Deals2 Page (Fetch API version) at root level
+app.get("/deals2", (req, res) => {
+  res.render("deals/deals2", { title: "Deals Fetch", layout: "./Layouts/layout" });
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

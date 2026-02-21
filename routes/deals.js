@@ -4,7 +4,7 @@ const Deal = require('../models/Deal');
 const Vote = require('../models/Vote');
 const Comment = require('../models/Comment');
 
-// GET All Deals
+
 // GET All Deals
 router.get('/', async (req, res) => {
     try {
@@ -13,6 +13,17 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
+    }
+});
+
+// GET All Deals as JSON
+router.get('/json', async (req, res) => {
+    try {
+        const deals = await Deal.find({});
+        res.json(deals);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server Error' });
     }
 });
 
