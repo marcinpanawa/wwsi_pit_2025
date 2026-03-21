@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import CookiePolicy from "./cookiePolicy";
 
 const MainLayout = ({ children }) => {
     const layoutStyle = {
@@ -25,6 +26,7 @@ const MainLayout = ({ children }) => {
                 {children}
             </main>
             <Footer />
+            <CookiePolicy />
         </div>
     );
 };
