@@ -1,3 +1,5 @@
+import { closeCookieWindow } from "../helpers";
+
 const cookiePolicyProject = () => {
     return (
         <div id="cookiePolicyProject">
@@ -17,7 +19,7 @@ const cookiePolicyProject = () => {
                             </div>
                         </div>
                         <div className="col-lg-2 text-center d-flex align-items-center">
-                            <button className="btn btn-primary mr-auto ml-auto" type="button" >I
+                            <button className="btn btn-primary mr-auto ml-auto" type="button" onClick={() => closeCookieWindow()} >I
                                 agree</button>
                         </div>
                     </div>

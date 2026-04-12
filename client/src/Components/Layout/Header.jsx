@@ -2,53 +2,60 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-    const styles = {
-        header: {
-            background: 'rgba(10, 25, 47, 0.9)',
-            backdropFilter: 'blur(20px)',
-            padding: '1.5rem 2rem',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            position: 'sticky',
-            top: 0,
-            zIndex: 1000,
-            borderBottom: '1px solid rgba(100, 255, 218, 0.1)',
-            boxShadow: '0 10px 30px rgba(2, 12, 27, 0.7)'
-        },
-        logo: {
-            fontSize: '1.75rem',
-            fontWeight: '900',
-            color: '#64ffda',
-            textDecoration: 'none',
-            letterSpacing: '2px',
-            textTransform: 'uppercase'
-        },
-        nav: {
-            display: 'flex',
-            gap: '2.5rem'
-        },
-        link: {
-            color: '#ccd6f6',
-            textDecoration: 'none',
-            fontSize: '0.9rem',
-            fontWeight: '600',
-            transition: 'all 0.3s ease',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
-        }
-    };
+    // TODO: Implement actual user authentication and data fetching
+    const locals = {};
+    const user = {};
 
     return (
-        <header style={styles.header}>
-            <Link to="/" style={styles.logo}>ANTIGRAVITY</Link>
-            <nav style={styles.nav}>
-                <Link to="/" style={styles.link}>Home</Link>
-                <Link to="/about" style={styles.link}>About</Link>
-                <Link to="/contact" style={styles.link}>Contact</Link>
-            </nav>
-        </header>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">Projekt</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <Link className="nav-link" to="/" >Home</Link>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/deals">Deals</a>
+                        </li>
+                        <li class="nav-item">
+                            <Link className="nav-link" to="/about" >About</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link className="nav-link" to="/contact" >Contact</Link>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav">
+                        {locals.user ? (
+                            <>
+                                <li className="nav-item">
+                                    <span className="nav-link">Welcome, {user.name}</span>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/auth/logout">Logout</a>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/auth/login">Login</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/auth/register">Register</a>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
     );
 };
 
 export default Header;
+
