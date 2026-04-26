@@ -1,26 +1,23 @@
 import React from 'react';
+import withAdditionalProps from '../Components/HOC/withAdditionalProps';
+import withData from '../Components/HOC/withData';
 
-const About = () => {
+const About = (props) => {
     const styles = {
         container: {
             padding: '5rem 2rem',
             maxWidth: '1200px',
             margin: '0 auto',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, #0a192f 0%, #112240 100%)',
-            color: '#fff',
+            color: '#000',
             borderRadius: '30px',
             border: '1px solid rgba(100, 255, 218, 0.1)',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
             marginTop: '3rem'
         },
         title: {
             fontSize: '3.5rem',
             fontWeight: '800',
             marginBottom: '1.5rem',
-            background: 'linear-gradient(90deg, #64ffda 0%, #4facfe 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
             letterSpacing: '-1px'
         },
         description: {
@@ -34,12 +31,14 @@ const About = () => {
 
     return (
         <div style={styles.container}>
+            <p>{props.fact.fact}</p>
             <h1 style={styles.title}>Our Vision</h1>
             <p style={styles.description}>
+
                 We are building the future of web applications with a focus on visual excellence and seamless user experience. Our mission is to combine power with elegance in every pixel.
             </p>
         </div>
     );
 };
 
-export default About;
+export default withData(withAdditionalProps(About));

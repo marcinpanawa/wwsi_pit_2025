@@ -1,6 +1,7 @@
 import React from 'react';
+import withData from '../Components/HOC/withData';
 
-const Contact = () => {
+const Contact = (props) => {
     const styles = {
         container: {
             padding: '5rem 2rem',
@@ -69,4 +70,4 @@ const Contact = () => {
     );
 };
 
-export default Contact;
+export default withData(Contact);

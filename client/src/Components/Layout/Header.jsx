@@ -16,16 +16,16 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/" >Home</Link>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/deals">Deals</a>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/deals">Deals</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/about" >About</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/contact" >Contact</Link>
                         </li>
                     </ul>
