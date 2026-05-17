@@ -1,6 +1,23 @@
-import { closeCookieWindow } from "../helpers";
+import React, { useState, useEffect } from "react";
+import { getCookie, setCookie } from "../helpers";
 
-const cookiePolicyProject = () => {
+const CookiePolicyProject = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const cookie = getCookie('cookiePolicyProject');
+        if (!cookie) {
+            setIsVisible(true);
+        }
+    }, []);
+
+    const handleClose = () => {
+        setCookie('cookiePolicyProject', 'true', 30);
+        setIsVisible(false);
+    };
+
+    if (!isVisible) return null;
+
     return (
         <div id="cookiePolicyProject">
             <div className="cookies-info card fixed-bottom" style={{ borderTop: "2px solid #008ac9 !important", marginBottom: "0" }}>
@@ -19,7 +36,7 @@ const cookiePolicyProject = () => {
                             </div>
                         </div>
                         <div className="col-lg-2 text-center d-flex align-items-center">
-                            <button className="btn btn-primary mr-auto ml-auto" type="button" onClick={() => closeCookieWindow()} >I
+                            <button className="btn btn-primary mr-auto ml-auto" type="button" onClick={handleClose} >I
                                 agree</button>
                         </div>
                     </div>
@@ -29,4 +46,4 @@ const cookiePolicyProject = () => {
     )
 }
 
-export default cookiePolicyProject;
+export default CookiePolicyProject;

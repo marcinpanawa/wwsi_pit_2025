@@ -6,13 +6,17 @@ const logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const cors = require("cors");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const dealsRouter = require("./routes/deals");
+const apiRouter = require("./routes/api");
 
 const app = express();
+app.use(cors());
+
 
 // Database setup
 mongoose.connect('mongodb://localhost/Projekt')
@@ -49,6 +53,8 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/deals", dealsRouter);
+app.use("/api", apiRouter);
+
 
 // Deals2 Page (Fetch API version) at root level
 app.get("/deals2", (req, res) => {

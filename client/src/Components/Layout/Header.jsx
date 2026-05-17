@@ -1,10 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppStoreContext } from '../../Contexts/AppStoreContext';
 
 const Header = () => {
-    // TODO: Implement actual user authentication and data fetching
-    const locals = {};
-    const user = {};
+    const { user, logout } = useContext(AppStoreContext);
+    const navigate = useNavigate();
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        logout();
+        navigate('/login');
+    };
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -28,24 +35,29 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/contact" >Contact</Link>
                         </li>
+                        {user && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/private" >Private</Link>
+                            </li>
+                        )}
                     </ul>
                     <ul className="navbar-nav">
-                        {locals.user ? (
+                        {user ? (
                             <>
                                 <li className="nav-item">
                                     <span className="nav-link">Welcome, {user.name}</span>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/auth/logout">Logout</a>
+                                    <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
                                 </li>
                             </>
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/auth/login">Login</a>
+                                    <Link className="nav-link" to="/login">Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/auth/register">Register</a>
+                                    <Link className="nav-link" to="/register">Register</Link>
                                 </li>
                             </>
                         )}
